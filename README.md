@@ -1,6 +1,6 @@
 # FPCC
 ---
-Fort Peck Community College built with Next.js + Payload CMS
+Fort Peck Community College website built with Next.js + Payload CMS
 
 ## Tech Stack
 ---
