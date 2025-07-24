@@ -31,35 +31,38 @@ export async function generateStaticParams() {
       return doc.slug !== 'home'
     })
     .map(({ slug }) => {
-      return { slug }
+      return ({ path: [slug] })
     })
-
   return params
 }
 
 type Args = {
   params: Promise<{
-    slug?: string
+    path?: string[]
   }>
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
-  const { slug = 'home' } = await paramsPromise
-  const url = '/' + slug
-
+  const { path } = await paramsPromise
+  const slug = path?.slice(-1)?.[0] || 'home'
+  
   let page: RequiredDataFromCollectionSlug<'pages'> | null
 
   page = await queryPageBySlug({
     slug,
   })
 
+  const fullSlug = '/' + path?.join('/');
+  const nestedSlug = page?.breadcrumbs?.slice(-1)?.[0]?.url || null;
+  const url = `/${nestedSlug ?? slug}`;
+
   // Remove this code once your website is seeded
   if (!page && slug === 'home') {
     page = homeStatic
   }
 
-  if (!page) {
+  if (!page || nestedSlug && fullSlug !== nestedSlug) {
     return <PayloadRedirects url={url} />
   }
 
@@ -80,7 +83,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = 'home' } = await paramsPromise
+  const { path } = await paramsPromise
+  const slug = path?.slice(-1)?.[0] || 'home'
+
   const page = await queryPageBySlug({
     slug,
   })
@@ -105,6 +110,5 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
       },
     },
   })
-
   return result.docs?.[0] || null
 })
