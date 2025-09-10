@@ -1,0 +1,94 @@
+.navWrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  max-width: 0;
+  height: calc(100vh - 90px);
+  opacity: 0;
+  background-color: var(--l-gray);
+  transition: all 0.1s ease-in-out;
+}
+.navWrapperOpen {
+  z-index: 10;
+  max-width: 700px;
+  opacity: 1;
+}
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 28px 40px;
+  height: 100%;
+  position: relative;
+}
+
+.navButton {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.subMenu {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 100%;
+  padding: 40px 0;
+  opacity: 0;
+  background: var(--white);
+  max-width: 0;
+  overflow: hidden;
+  transition: all 0.1s ease-in-out;
+}
+.subMenuOpen {
+  max-width: 1000px;
+  padding: 40px 22px;
+  opacity: 1;
+}
+
+.linkGroup {
+  margin-bottom: 24px;
+}
+
+.linkGroupTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--blue);
+  text-wrap: nowrap;
+  margin: 0 0 12px 0;
+}
+
+.linkGroupLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.linkGroupLinks a {
+  padding-left: 12px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.linkGroupLinks a:hover {
+  color: var(--primary);
+}
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.footerLink {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #1a166422;
+  text-decoration: none;
+  padding: 8px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

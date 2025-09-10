@@ -1,15 +1,24 @@
 import type { Block, Field } from 'payload'
-
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-
 import { link } from '@/fields/link'
+import { RichTextFeatures } from '../RichTextFeatures'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
-const columnFields: Field[] = [
+export const richTextFields = (name = 'richText', label: false | string = false): Field[] => {
+  return [{
+    name,
+    type: 'richText',
+    label,
+    editor: lexicalEditor({
+      features: ({ rootFeatures }) => [
+        ...rootFeatures,
+        ...RichTextFeatures,
+      ],
+    }),
+  }]
+}
+
+
+export const columnFields: Field[] = [
   {
     name: 'size',
     type: 'select',
@@ -20,8 +29,16 @@ const columnFields: Field[] = [
         value: 'oneThird',
       },
       {
+        label: 'Two Fifths',
+        value: 'twoFifths',
+      },
+      {
         label: 'Half',
         value: 'half',
+      },
+      {
+        label: 'Three Fifths',
+        value: 'threeFifths',
       },
       {
         label: 'Two Thirds',
@@ -34,20 +51,62 @@ const columnFields: Field[] = [
     ],
   },
   {
-    name: 'richText',
-    type: 'richText',
-    editor: lexicalEditor({
-      features: ({ rootFeatures }) => {
-        return [
-          ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-          FixedToolbarFeature(),
-          InlineToolbarFeature(),
-        ]
+    type: 'row',
+    fields: [
+      {
+        name: 'borderToggle',
+        label: 'Column Border?',
+        type: 'checkbox',
+        defaultValue: false,
+        admin: {
+          width: '33%',
+        }
       },
-    }),
-    label: false,
+      {
+        name: 'embedToggle',
+        label: 'Video Embed?',
+        type: 'checkbox',
+        defaultValue: false,
+        admin: {
+          width: '33%',
+        }
+      },
+    ]
   },
+  {
+    name: 'border',
+    type: 'select',
+    admin: {
+      condition: (_data, siblingData) => {
+        return Boolean(siblingData?.borderToggle)
+      },
+    },
+    options: [
+      {
+        label: 'Right',
+        value: 'right',
+      },
+      {
+        label: 'Left',
+        value: 'left',
+      }
+    ]
+  },
+  {
+    name: 'embed',
+    type: 'code',
+    admin: {
+      condition: (_data, siblingData) => {
+        return Boolean(siblingData?.embedToggle)
+      },
+      editorOptions: {
+        formatOnPaste: true,
+        formatOnType: true,
+      },
+    },
+    label: 'Embed Code',
+  },
+  ...richTextFields(),
   {
     name: 'enableLink',
     type: 'checkbox',
@@ -61,12 +120,33 @@ const columnFields: Field[] = [
       },
     },
   }),
+  {
+    name: 'bg',
+    label: 'Background Image',
+    relationTo: 'media',
+    type: 'relationship',
+  },
 ]
 
 export const Content: Block = {
   slug: 'content',
   interfaceName: 'ContentBlock',
   fields: [
+    {
+      name: 'contSize',
+      type: 'select',
+      defaultValue: 'normal',
+      options: [
+        {
+          label: 'Normal',
+          value: 'normal',
+        },
+        {
+          label: 'Large',
+          value: 'large',
+        },
+      ],
+    },
     {
       name: 'columns',
       type: 'array',

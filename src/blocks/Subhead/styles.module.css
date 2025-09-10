@@ -1,0 +1,8 @@
+.wrapper {
+  border-top: 8px solid var(--white);
+  background: var(--blue);
+}
+.wrapper * {
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+}

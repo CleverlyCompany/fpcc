@@ -1,0 +1,28 @@
+.contentWrapper {
+  position: relative;
+  z-index: 2;
+  color: var(--white);
+}
+.wrapper {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.container {
+  padding-top: 336px;
+}
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 745px;
+}
+.links {
+  display: flex;
+  text-wrap: nowrap;
+  gap: 12px;
+}
+.contentWrapper h1 {
+  text-transform: uppercase;
+}

@@ -4,14 +4,17 @@ import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
+import { Section } from '../../blocks/Section/config'
+import { SubheadBlock } from '../../blocks/Subhead/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { generatePreviewPath, normalizePath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import { testPreviewPath } from '../../utilities/generatePreviewPath'
 
 import {
   MetaDescriptionField,
@@ -37,24 +40,34 @@ export const Pages: CollectionConfig<'pages'> = {
     slug: true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
-    livePreview: {
-      url: ({ data, req }) => {
-        const path = generatePreviewPath({
-          slug: typeof data?.slug === 'string' ? data.slug : '',
-          collection: 'pages',
-          req,
-        })
+    defaultColumns: ['title', 'slug', 'updatedAt', 'parent'],
+    preview: (data) => {
+      const ORIGIN = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
-        return path
-      },
+      const breadcrumbs = Array.isArray((data as any)?.breadcrumbs)
+        ? (data as any).breadcrumbs
+        : []
+
+      const crumbUrl: string | undefined = breadcrumbs.at(-1)?.url
+      const slug = String((data as any)?.slug ?? '')
+
+      // Map "home" to "/" always; otherwise use breadcrumb URL or /slug
+      const rawPath = slug === 'home'
+        ? '/'
+        : (crumbUrl && crumbUrl.trim()) || `/${slug}`
+
+      const path = normalizePath(rawPath)
+
+      const url = new URL('/next/preview', ORIGIN)
+      url.searchParams.set('previewSecret', process.env.PREVIEW_SECRET || '')
+      url.searchParams.set('path', path)
+
+      // Optional but commonly expected by some preview handlers:
+      url.searchParams.set('slug', slug)
+      url.searchParams.set('collection', 'pages')
+
+      return url.toString()
     },
-    preview: (data, { req }) =>
-      generatePreviewPath({
-        slug: typeof data?.slug === 'string' ? data.slug : '',
-        collection: 'pages',
-        req,
-      }),
     useAsTitle: 'title',
   },
   fields: [
@@ -75,7 +88,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, SubheadBlock, Section],
               required: true,
               admin: {
                 initCollapsed: true,

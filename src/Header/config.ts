@@ -16,6 +16,60 @@ export const Header: GlobalConfig = {
         link({
           appearances: false,
         }),
+        {
+          name: 'subItems',
+          type: 'array',
+          fields: [
+            {
+              name: 'type',
+              type: 'radio',
+              defaultValue: 'simple',
+              options: [
+                {
+                  label: 'Simple Link',
+                  value: 'simple',
+                },
+                {
+                  label: 'Link Group',
+                  value: 'group',
+                },
+              ],
+            },
+            {
+              name: 'simpleLink',
+              type: 'group',
+              admin: {
+                condition: (_, siblingData) => siblingData?.type === 'simple',
+              },
+              fields: [
+                link({ appearances: false }),
+              ],
+            },
+            {
+              name: 'linkGroup',
+              type: 'group',
+              admin: {
+                condition: (_, siblingData) => siblingData?.type === 'group',
+              },
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'links',
+                  type: 'array',
+                  fields: [
+                    link({ appearances: false }),
+                  ],
+                  maxRows: 8,
+                },
+              ],
+            },
+          ],
+          maxRows: 6,
+        },
       ],
       maxRows: 6,
       admin: {

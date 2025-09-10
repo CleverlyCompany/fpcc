@@ -1,0 +1,7 @@
+.embedWrapper {
+  max-width: 100%;
+}
+.embedWrapper iframe {
+  max-width: 100%;
+  max-height: 300px;
+}

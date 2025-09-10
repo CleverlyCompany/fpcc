@@ -24,9 +24,6 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     components: {
-      // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below.
-      beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
       beforeDashboard: ['@/components/BeforeDashboard'],
@@ -70,7 +67,7 @@ export default buildConfig({
     ...plugins,
     nestedDocsPlugin({
       collections: ['pages', 'posts'],
-      generateLabel: (_, doc) => doc?.title,
+      generateLabel: (_, doc) => doc?.title as string,
       generateURL: (docs) =>
         docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
     }),

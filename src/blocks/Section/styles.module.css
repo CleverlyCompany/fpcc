@@ -1,0 +1,34 @@
+.header {
+  width: 100%;
+  position: relative;
+  min-height: 275px;
+  display: flex;
+}
+.header::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #48484899;
+  mix-blend-mode: multiply;
+  content: '';
+  z-index: 2;
+}
+.headerImg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.headerContent {
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+  z-index: 3;
+}
+.headerContent * {
+  color: var(--white);
+}
+.headerContent h2 {
+  margin-bottom: 12px;
+}

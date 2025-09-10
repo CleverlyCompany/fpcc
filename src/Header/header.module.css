@@ -1,0 +1,39 @@
+.headerWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  background: var(--white);
+}
+.headerContainer {
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.headerTitle span {
+  font-family: trajan-pro-3, serif;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  line-height: 0.8;
+}
+.headerTitle .subTitle {
+  font-size: 13px;
+}
+.headerBtn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  background: var(--l-gray);
+}

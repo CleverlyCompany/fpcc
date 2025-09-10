@@ -5,8 +5,15 @@ import React from 'react'
 
 import type { Page, Post } from '@/payload-types'
 
-type CMSLinkType = {
-  appearance?: 'inline' | ButtonProps['variant']
+export type CMSLinkType = {
+  appearance?:
+    | 'inline'
+    | ButtonProps['variant']
+    | 'gray'
+    | 'redIcon'
+    | 'blueIcon'
+    | 'greenIcon'
+    | 'darkBlueIcon'
   children?: React.ReactNode
   className?: string
   label?: string | null
