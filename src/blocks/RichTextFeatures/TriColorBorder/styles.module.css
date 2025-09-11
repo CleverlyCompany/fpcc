@@ -1,0 +1,12 @@
+.triColorBorder {
+  margin-top: 12px;
+  height: 8px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--blue) 0% 25%,
+    var(--red) 25% 50%,
+    var(--green) 50% 75%,
+    var(--yellow) 75% 100%
+  );
+}

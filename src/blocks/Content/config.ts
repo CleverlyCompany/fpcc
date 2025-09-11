@@ -25,6 +25,10 @@ export const columnFields: Field[] = [
     defaultValue: 'oneThird',
     options: [
       {
+        label: 'One Fourth',
+        value: 'oneFourth',
+      },
+      {
         label: 'One Third',
         value: 'oneThird',
       },
@@ -128,32 +132,36 @@ export const columnFields: Field[] = [
   },
 ]
 
+export const contentFields: Field[] = [
+  {
+    name: 'contSize',
+    type: 'select',
+    defaultValue: 'normal',
+    options: [
+      {
+        label: 'Normal',
+        value: 'normal',
+      },
+      {
+        label: 'Large',
+        value: 'large',
+      },
+    ],
+  },
+  {
+    name: 'columns',
+    type: 'array',
+    admin: {
+      initCollapsed: true,
+    },
+    fields: columnFields,
+  },
+]
+
 export const Content: Block = {
   slug: 'content',
   interfaceName: 'ContentBlock',
   fields: [
-    {
-      name: 'contSize',
-      type: 'select',
-      defaultValue: 'normal',
-      options: [
-        {
-          label: 'Normal',
-          value: 'normal',
-        },
-        {
-          label: 'Large',
-          value: 'large',
-        },
-      ],
-    },
-    {
-      name: 'columns',
-      type: 'array',
-      admin: {
-        initCollapsed: true,
-      },
-      fields: columnFields,
-    },
+    ...contentFields,
   ],
 }

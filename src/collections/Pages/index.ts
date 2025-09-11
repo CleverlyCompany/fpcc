@@ -5,16 +5,17 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Section } from '../../blocks/Section/config'
+import { Banner } from '../../blocks/Banner/config'
 import { SubheadBlock } from '../../blocks/Subhead/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { ContentBackground } from '../../blocks/ContentBackground/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { generatePreviewPath, normalizePath } from '../../utilities/generatePreviewPath'
+import { normalizePath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
-import { testPreviewPath } from '../../utilities/generatePreviewPath'
 
 import {
   MetaDescriptionField,
@@ -88,7 +89,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, SubheadBlock, Section],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, SubheadBlock, Section, Banner, ContentBackground],
               required: true,
               admin: {
                 initCollapsed: true,

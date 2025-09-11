@@ -17,6 +17,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = async (props) => {
     twoThirds: 'md:col-span-8',
     twoFifths: 'md:col-span-5',
     threeFifths: 'md:col-span-7',
+    oneFourth: 'md:col-span-3',
   }
 
   return (

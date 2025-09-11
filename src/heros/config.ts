@@ -35,8 +35,21 @@ export const hero: Field = {
           label: 'Low Impact',
           value: 'lowImpact',
         },
+        {
+          label: 'Homepage Hero',
+          value: 'homepage',
+        },
       ],
       required: true,
+    },
+    {
+      type: 'relationship',
+      name: 'imgEmbed',
+      relationTo: 'media',
+      admin: {
+        condition: (_, siblingData) => siblingData?.type === 'homepage',
+      },
+      label: 'Image Embed',
     },
     {
       name: 'richText',
@@ -53,12 +66,21 @@ export const hero: Field = {
       }),
       label: false,
     },
-    linkGroup({}),
+    linkGroup({
+      appearances: false,
+      overrides: {
+        admin: {
+          condition: (data, siblingData) => {
+            return siblingData?.type !== 'homepage'
+          },
+        },
+      },
+    }),
     {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'homepage'].includes(type),
       },
       relationTo: 'media',
       required: true,

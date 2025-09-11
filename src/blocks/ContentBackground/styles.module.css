@@ -1,0 +1,9 @@
+.wrapper {
+  position: relative;
+}
+.wrapper h2 span {
+  background-color: unset;
+}
+.wrapper h2 {
+  margin-top: 16px;
+}

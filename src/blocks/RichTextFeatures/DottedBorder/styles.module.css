@@ -1,0 +1,7 @@
+.dottedBorder {
+  border-top: 5px dotted var(--red);
+  width: 100%;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}

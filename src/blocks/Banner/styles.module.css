@@ -1,0 +1,13 @@
+.contentWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px 0;
+}
+.richText * {
+  color: var(--white);
+  font-family: 'Trajan Pro 3', serif;
+  text-transform: uppercase;
+}

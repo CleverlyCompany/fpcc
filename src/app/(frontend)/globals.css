@@ -180,3 +180,9 @@ h3,
   padding: 24px;
   background-color: var(--border-gray);
 }
+.banner-wrapper {
+  background-image: url('../../../public/imgs/bannerBG.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}

@@ -12,13 +12,15 @@ import {
 import { LinkRow } from '../RichTextFeatures/LinkRow/config'
 import { AccordionContent } from '../RichTextFeatures/AccordionContent/config'
 import { InlineLink } from '../RichTextFeatures/InlineLink/config'
+import { TriColorBorder } from './TriColorBorder/config'
 import { VideoEmbed } from '../VideoEmbed/config'
 import { RichTextColors } from './index.client'
 import { RichTextSizes } from './index.client'
 import { RichTextStyles } from './index.client'
+import { DottedBorder } from './DottedBorder/config'
 
 
-const blocks = [LinkRow, InlineLink, AccordionContent, VideoEmbed]
+const blocks = [LinkRow, InlineLink, AccordionContent, VideoEmbed, DottedBorder, TriColorBorder]
 
 export const RichTextFeatures = [
     HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),

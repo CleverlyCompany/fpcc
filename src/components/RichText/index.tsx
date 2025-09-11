@@ -15,7 +15,8 @@ import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 import { LinkRowBlock } from '@/blocks/RichTextFeatures/LinkRow/Component'
 import { AccordionContentBlock } from '@/blocks/RichTextFeatures/AccordionContent/Component'
 import { InlineLinkBlock } from '@/blocks/RichTextFeatures/InlineLink/Component'
-
+import { DottedBorderBlock } from '@/blocks/RichTextFeatures/DottedBorder/Component'
+import { TriColorBorderBlock } from '@/blocks/RichTextFeatures/TriColorBorder/Component'
 import {
   RichTextColors as colorMap,
   RichTextSizes as sizeMap,
@@ -86,7 +87,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   },
   ...LinkJSXConverter({ internalDocToHref }),
   blocks: {
-    banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    banner: ({ node }) => <BannerBlock {...node.fields} />,
     mediaBlock: ({ node }) => (
       <MediaBlock
         className="col-start-1 col-span-3"
@@ -102,6 +103,8 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     linkRow: ({ node }) => <LinkRowBlock {...node.fields} />,
     inlineLink: ({ node }: { node: BlockNode }) => <InlineLinkBlock {...node.fields} />,
     accordionContent: ({ node }: { node: BlockNode }) => <AccordionContentBlock {...node.fields} />,
+    dottedBorder: ({ node }: { node: BlockNode }) => <DottedBorderBlock {...node.fields} />,
+    triColorBorder: ({ node }: { node: BlockNode }) => <TriColorBorderBlock {...node.fields} />,
   },
 })
 
